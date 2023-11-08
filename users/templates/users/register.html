@@ -1,0 +1,51 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}
+    Registration Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'users/css/login_register_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center login-container">
+        <div class="col-md-6">
+            <div class="logo">
+                <img class="img-logo" src="{% static 'main_chat/images/bot.png' %}" alt="Your Logo Here">
+                <h2>Please Sign Up</h2>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname</label>
+                    <input type="text" class="form-control" id="surname" placeholder="Enter your surname">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label for="password-conf">Password Confirmation</label>
+                    <input type="password" class="form-control" id="password-conf" placeholder="Enter your password confirmation">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <p class="signup-link">Already have an account? <a href="#">Sign In</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
