@@ -20,32 +20,46 @@
                 <h1 class="logo-text">SynthiaBot</h1>
             </div>
             <div class="header">
-                <button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button>
+                {% if get_history %}
+                    <button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button>
+                {% endif %}
                 <button class="btn btn-light mx-auto"><i class="fas fa-font"></i> Text</button>
                 <button class="btn btn-light mx-auto"><i class="fas fa-image"></i> Image</button>
                 <a href="{% url 'users:logout' %}"><button class="btn btn-primary float-right"><i class="fas fa-sign-out-alt"></i> Log Out</button></a>
                 <div class="clearfix"></div>
             </div>
             <div class="chat-box">
-                <div class="message user1">
-                    <div class="fw-bold">
-                        <i class="fas fa-user"></i> <strong>John</strong>
-                    </div>
-                    <p>Hello, how are you?</p>
-                </div>
                 <div class="message user2">
                     <div class="fw-bold">
                         <i class="fas fa-robot"></i> <strong>Bot</strong>
                     </div>
-                    <p>I'm fine, thank you!</p>
+                    <p>Hi {{request.user.username}} 👋, Let's Talk!🤖</p>
                 </div>
+                {% for history in get_history %}
+                    <div class="message user1">
+                        <div class="fw-bold">
+                            <i class="fas fa-user"></i> <strong>{{ history.user.username }}</strong>
+                        </div>
+                        <p>{{ history.messageInput }}</p>
+                    </div>
+
+                    <div class="message user2">
+                    <div class="fw-bold">
+                        <i class="fas fa-robot"></i> <strong>Bot</strong>
+                    </div>
+                    <p>{{ history.bot_response }}</p>
+                </div>
+                {% endfor %}
             </div>
 
-            <label for="input" class="form-label">Enter your prompt</label>
-            <div class="input-box">
-                <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input"></textarea>
-                <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
-            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="input" class="form-label">Enter your prompt</label>
+                <div class="input-box">
+                    <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input" style="min-height: 10px;"></textarea>
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

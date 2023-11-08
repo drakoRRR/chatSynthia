@@ -9,21 +9,20 @@ from main_chat.models import ChatGptBot
 def chat_text_view(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            user_input = request.POST.get('user-input')
             openai.api_key = OPENAI_KEY
+            client = openai.OpenAI()
+            user_input = request.POST.get('user-input')
             clean_user_prompt = str(user_input).strip()
 
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=clean_user_prompt,
-                temperature=0,
-                max_tokens=1000,
-                top_p=1,
-                frequency_penalty=0.5,
-                presence_penalty=0
+            completion = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "user",
+                     "content": f"{clean_user_prompt}"},
+                ]
             )
-            # get response
-            bot_response = response['choices'][0]['text']
+
+            bot_response = completion['choices'][0]['text']
 
             obj, created = ChatGptBot.objects.get_or_create(
                 user=request.user,

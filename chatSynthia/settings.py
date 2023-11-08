@@ -158,4 +158,4 @@ LOGOUT_REDIRECT_URL = '/users/signin/'
 
 # OpenAI
 
-OPENAI_KEY = env('OPENAI_KEY')
+OPENAI_KEY = env('OPENAI_API_KEY')
