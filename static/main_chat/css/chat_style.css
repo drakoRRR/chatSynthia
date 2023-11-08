@@ -1,0 +1,71 @@
+body {
+    background-color: #f1eeee;
+}
+
+.chat-container {
+    margin-top: 100px;
+}
+
+.header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.col-md-6 {
+    min-width: 1000px;
+}
+
+.chat-box {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.user1 {
+    background-color: #f1eeee;
+}
+
+.user2 {
+    background-color: #6c757e;
+    color: white;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box input {
+    padding-right: 40px;
+}
+
+.input-box button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+}
+
+.logo {
+    text-align: center; /* Центрируем логотип по горизонтали */
+    margin-bottom: 150px; /* Поднимаем логотип немного вверх */
+}
+
+.img-logo {
+    max-width: 35%;
+    margin: 0 auto;
+}
+
+.logo-text {
+    font-size: 45px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    margin-top: 10px; /* Отступ сверху для разделения логотипа и текста */
+    /* Другие стили, если необходимо */
+}
