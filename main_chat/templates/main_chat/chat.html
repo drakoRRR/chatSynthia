@@ -23,7 +23,7 @@
                 <button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button>
                 <button class="btn btn-light mx-auto"><i class="fas fa-font"></i> Text</button>
                 <button class="btn btn-light mx-auto"><i class="fas fa-image"></i> Image</button>
-                <button class="btn btn-primary float-right"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+                <a href="{% url 'users:logout' %}"><button class="btn btn-primary float-right"><i class="fas fa-sign-out-alt"></i> Log Out</button></a>
                 <div class="clearfix"></div>
             </div>
             <div class="chat-box">
@@ -41,9 +41,10 @@
                 </div>
             </div>
 
+            <label for="input" class="form-label">Enter your prompt</label>
             <div class="input-box">
-                <input type="text" class="form-control" placeholder="Type a prompt...">
-                <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input"></textarea>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>

@@ -13,5 +13,4 @@ urlpatterns = [
     path('profile/<int:pk>/', login_required(views.ProfileView.as_view()), name='profile'),
 
     path('logout/', LogoutView.as_view(), name='logout'),
-
 ]

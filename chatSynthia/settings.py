@@ -18,6 +18,12 @@ import environ
 env = environ.Env(
     DEBUG=(bool),
     SECRET_KEY=(str),
+
+    DB_NAME=(str),
+    DB_USER=(str),
+    DB_PASSWORD=(str),
+    DB_HOST=(str),
+    DB_PORT=(int),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -142,3 +148,14 @@ STATICFILES_DIRS = [BASE_DIR / 'static/']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Users
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/signin/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/users/signin/'
+
+# OpenAI
+
+OPENAI_KEY = env('OPENAI_KEY')
