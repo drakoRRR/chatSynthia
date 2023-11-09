@@ -3,7 +3,7 @@ body {
 }
 
 .chat-container {
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 .header {
@@ -19,7 +19,7 @@ body {
     background-color: #fff;
     padding: 20px;
     margin-bottom: 10px;
-    height: 400px;
+    height: 500px;
     overflow-y: auto;
 }
 
@@ -54,8 +54,8 @@ body {
 }
 
 .logo {
-    text-align: center; /* Центрируем логотип по горизонтали */
-    margin-bottom: 150px; /* Поднимаем логотип немного вверх */
+    text-align: center;
+    margin-bottom: 70px;
 }
 
 .img-logo {
@@ -64,8 +64,18 @@ body {
 }
 
 .logo-text {
-    font-size: 45px; /* Размер шрифта */
-    color: #333; /* Цвет текста */
-    margin-top: 10px; /* Отступ сверху для разделения логотипа и текста */
-    /* Другие стили, если необходимо */
+    font-size: 45px;
+    color: #333;
+    margin-top: 10px;
+}
+
+
+.image-container {
+    text-align: center;
+}
+
+.centered-and-resized-image {
+    max-width: 70%; /* Максимальная ширина изображения 100% от родительского контейнера */
+    display: inline-block;
+    margin: 0 auto;
 }

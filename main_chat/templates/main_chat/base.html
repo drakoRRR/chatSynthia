@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center chat-container">
+        <div class="col-md-6">
+            <div class="logo">
+                <img class="img-logo" src="{% static 'main_chat/images/bot.png' %}" alt="">
+                <h1 class="logo-text">SynthiaBot</h1>
+            </div>
+            <div class="header">
+                {% block delete-button %} {% endblock %}
+                <a href="{% url 'chat:chat' %}">
+                    <button class="btn btn-light mx-auto"><i class="fas fa-font"></i> Text</button>
+                </a>
+                <a href="{% url 'chat:image_chat' %}">
+                    <button class="btn btn-light mx-auto"><i class="fas fa-image"></i> Image</button>
+                </a>
+                <a href="{% url 'users:logout' %}">
+                    <button class="btn btn-primary float-right"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+
+            {% block content %} {% endblock %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="input" class="form-label">Enter your prompt</label>
+                <div class="input-box">
+                    <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input"
+                              style="min-height: 10px; resize: none;"></textarea>
+                    <button class="btn btn-primary" type="submit" style="height: 61px;"><i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Chat Page
+    Chat Image Page
 {% endblock %}
 
 {% block styles %}
@@ -11,7 +11,7 @@
 
 {% block delete-button %}
     {% if get_history %}
-        <a href="{% url 'chat:delete' %}">
+        <a href="{% url 'chat:delete_images' %}">
             <button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button>
         </a>
     {% endif %}
@@ -23,7 +23,7 @@
             <div class="fw-bold">
                 <i class="fas fa-robot"></i> <strong>Bot</strong>
             </div>
-            <p>Hi {{ request.user.username }} 👋, Let's Talk!🤖</p>
+            <p>Hi {{ request.user.username }} 👋, Let's Talk and Generate Images!🤖</p>
         </div>
         {% for history in get_history %}
             <div class="message user1">
@@ -37,7 +37,9 @@
                 <div class="fw-bold">
                     <i class="fas fa-robot"></i> <strong>Bot</strong>
                 </div>
-                <p>{{ history.bot_response }}</p>
+                <div class="image-container">
+                    <img src="{{ history.bot_image.url }}" alt="" class="centered-and-resized-image">
+                </div>
             </div>
         {% endfor %}
     </div>

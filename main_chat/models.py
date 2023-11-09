@@ -11,3 +11,12 @@ class ChatGptBot(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class ChatGptBotImage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    messageInput = models.TextField()
+    bot_image = models.ImageField(upload_to='users_image_ai')
+
+    def __str__(self):
+        return self.user.username
