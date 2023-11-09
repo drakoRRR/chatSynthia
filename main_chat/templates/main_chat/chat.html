@@ -21,9 +21,9 @@
             </div>
             <div class="header">
                 {% if get_history %}
-                    <button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button>
+                    <a href="{% url 'chat:delete' %}"><button class="btn btn-danger float-left"><i class="fas fa-trash-alt"></i> Delete Chat</button></a>
                 {% endif %}
-                <button class="btn btn-light mx-auto"><i class="fas fa-font"></i> Text</button>
+                <a href="{% url 'chat:chat' %}"><button class="btn btn-light mx-auto"><i class="fas fa-font"></i> Text</button></a>
                 <button class="btn btn-light mx-auto"><i class="fas fa-image"></i> Image</button>
                 <a href="{% url 'users:logout' %}"><button class="btn btn-primary float-right"><i class="fas fa-sign-out-alt"></i> Log Out</button></a>
                 <div class="clearfix"></div>
@@ -56,8 +56,8 @@
                 {% csrf_token %}
                 <label for="input" class="form-label">Enter your prompt</label>
                 <div class="input-box">
-                    <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input" style="min-height: 10px;"></textarea>
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                    <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input" style="min-height: 10px; resize: none;"></textarea>
+                    <button class="btn btn-primary" type="submit" style="height: 61px;"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </form>
         </div>

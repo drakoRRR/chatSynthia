@@ -1,4 +1,5 @@
 import openai
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from chatSynthia.settings import OPENAI_KEY
@@ -22,7 +23,7 @@ def chat_text_view(request):
                 ]
             )
 
-            bot_response = completion['choices'][0]['text']
+            bot_response = completion.choices[0].message.content
 
             obj, created = ChatGptBot.objects.get_or_create(
                 user=request.user,
@@ -31,9 +32,15 @@ def chat_text_view(request):
             )
             return redirect(request.META['HTTP_REFERER'])
         else:
-            # retrieve all messages belong to logged in user
             get_history = ChatGptBot.objects.filter(user=request.user)
             context = {'get_history': get_history}
             return render(request, 'main_chat/chat.html', context)
     else:
         return redirect("users:login")
+
+
+@login_required
+def delete_history(request):
+    chatGptobj = ChatGptBot.objects.filter(user=request.user)
+    chatGptobj.delete()
+    return redirect(request.META['HTTP_REFERER'])
