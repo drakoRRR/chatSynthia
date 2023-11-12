@@ -30,14 +30,14 @@
                 <div class="fw-bold">
                     <i class="fas fa-user"></i> <strong>{{ history.user.username }}</strong>
                 </div>
-                <p>{{ history.messageInput }}</p>
+                <p>{{ history.messageInput }} <a class="user1-link" href="{% url 'chat:sound' history.id %}"><i class="fas fa-volume-up"></i></a></p>
             </div>
 
             <div class="message user2">
                 <div class="fw-bold">
                     <i class="fas fa-robot"></i> <strong>Bot</strong>
                 </div>
-                <p>{{ history.bot_response }}</p>
+                <p>{{ history.bot_response }} <a class="user2-link" href="{% url 'chat:sound' history.id %}"><i class="fas fa-volume-up"></i></a></p>
             </div>
         {% endfor %}
     </div>

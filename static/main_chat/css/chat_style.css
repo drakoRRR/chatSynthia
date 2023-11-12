@@ -51,6 +51,8 @@ body {
     right: 0;
     top: 0;
     border: none;
+    height: 61px;
+    margin-left: 5px;
 }
 
 .logo {
@@ -78,4 +80,14 @@ body {
     max-width: 70%; /* Максимальная ширина изображения 100% от родительского контейнера */
     display: inline-block;
     margin: 0 auto;
+}
+
+.user1-link {
+    text-decoration: none;
+    color: #333333;
+}
+
+.user2-link {
+    text-decoration: none;
+    color: white;
 }
