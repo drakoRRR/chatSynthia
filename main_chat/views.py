@@ -1,12 +1,12 @@
+import os
+import time
+
 import requests
 
 import openai
 
-import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
-from pydub import AudioSegment
-from pydub.playback import play
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -16,33 +16,16 @@ from chatSynthia.settings import OPENAI_KEY
 from main_chat.models import ChatGptBot, ChatGptBotImage
 
 
-# Create your views here.
 def chat_text_view(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             openai.api_key = OPENAI_KEY
             client = openai.OpenAI()
-            clean_user_prompt = None
+            user_input = request.POST.get('user-input')
+            clean_user_prompt = str(user_input).strip()
 
-            button_clicked = request.POST.get('button_clicked', None)
-
-            if button_clicked == 'microphone':
-                # Логика для кнопки микрофона
-                recognizer = sr.Recognizer()
-
-                with sr.Microphone() as source:
-                    print("Listening for commands...")
-                    recognizer.adjust_for_ambient_noise(source)
-                    audio = recognizer.listen(source)
-
-                try:
-                    clean_user_prompt = recognizer.recognize_google(audio)
-                except Exception:
-                    print('error')
-
-            elif button_clicked == 'paper_plane':
-                user_input = request.POST.get('user-input')
-                clean_user_prompt = str(user_input).strip()
+            user_input = request.POST.get('user-input')
+            clean_user_prompt = str(user_input).strip()
 
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
@@ -108,14 +91,12 @@ def sound_message(request, history_id):
     obj = ChatGptBot.objects.get(id=history_id)
 
     command = obj.messageInput
-    tts = gTTS(text=command, lang='en')
-    count = ChatGptBot.objects.count() + 1
-    name_audio_file = f'response{count}.mp3'
+    tts = gTTS(text=command, lang='en', slow=False)
+    name_audio_file = 'response.mp3'
     tts.save(f'audios/{name_audio_file}')
-    # playsound(f'audios/{name_audio_file}')
 
-    sound = AudioSegment.from_file(f'audios/{name_audio_file}', format='mp3')
-    play(sound)
+    playsound(f'audios/{name_audio_file}')
+    os.remove(f'audios/{name_audio_file}')
 
     return redirect(request.META['HTTP_REFERER'])
 

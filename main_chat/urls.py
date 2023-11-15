@@ -10,5 +10,5 @@ urlpatterns = [
     path('image/', views.chat_image_view, name='image_chat'),
     path('delete/images/', views.delete_history_images, name='delete_images'),
 
-    path('sound/<int:history_id>', views.sound_message, name='sound')
+    path('sound/<int:history_id>/', views.sound_message, name='sound')
 ]

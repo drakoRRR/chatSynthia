@@ -41,7 +41,7 @@
                 <div class="input-box">
                     <textarea class="form-control" id="input" placeholder="Type a prompt..." name="user-input"
                               style="min-height: 10px; resize: none;"></textarea>
-                    <button class="btn btn-primary" type="button" name="button_clicked" value="microphone"><i class="fas fa-microphone" style="margin-right: 50px;"></i></button>
+                    <button class="btn btn-primary" id="start-record-btn" type="button" name="button_clicked" value="microphone"><i class="fas fa-microphone" style="margin-right: 50px; color: white;"></i></button>
                     <button class="btn btn-primary" type="submit" name="button_clicked" value="paper_plane"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </form>
@@ -53,7 +53,20 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    {% block script %} {% endblock %}
+    {% block script %}
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+
+        document.querySelector("#start-record-btn").addEventListener("click", () => {
+            recognition.start();
+        });
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            document.querySelector("#input").value = transcript;
+        };
+    {% endblock %}
 </script>
 </body>
 </html>
