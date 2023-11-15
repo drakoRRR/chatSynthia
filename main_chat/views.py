@@ -1,6 +1,4 @@
 import os
-import time
-
 import requests
 
 import openai
@@ -21,8 +19,6 @@ def chat_text_view(request):
         if request.method == 'POST':
             openai.api_key = OPENAI_KEY
             client = openai.OpenAI()
-            user_input = request.POST.get('user-input')
-            clean_user_prompt = str(user_input).strip()
 
             user_input = request.POST.get('user-input')
             clean_user_prompt = str(user_input).strip()
@@ -87,10 +83,19 @@ def chat_image_view(request):
         return redirect("users:login")
 
 
-def sound_message(request, history_id):
-    obj = ChatGptBot.objects.get(id=history_id)
+def sound_message(request, history_id, source):
+    command = None
 
-    command = obj.messageInput
+    if source == 'user':
+        obj = ChatGptBot.objects.get(id=history_id)
+        command = obj.messageInput
+    elif source == 'bot':
+        obj = ChatGptBot.objects.get(id=history_id)
+        command = obj.bot_response
+    elif source == 'user-image':
+        obj = ChatGptBotImage.objects.get(id=history_id)
+        command = obj.messageInput
+
     tts = gTTS(text=command, lang='en', slow=False)
     name_audio_file = 'response.mp3'
     tts.save(f'audios/{name_audio_file}')
